@@ -1,0 +1,5 @@
+out/audio.wav
+out/vo.wav
+out/render.log
+out/*.png
+__pycache__/
