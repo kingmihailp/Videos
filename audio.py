@@ -271,10 +271,8 @@ def main(out):
     music += np.stack([amb, amb])
     # tiny stereo decorrelation on the ambience
     music[1] = np.roll(music[1], 400)
-    env = lp(np.abs(voice), 6)
-    env = np.clip(env / (env.max() + 1e-6) * 3.5, 0, 1)
-    duck = 1 - 0.45 * env
-    mix = music * duck + np.stack([voice, voice]) * 0.95
+    # voice-over is disabled: it is only synthesised to time the subtitles
+    mix = music
     mix *= 0.92 / np.abs(mix).max()
     mix *= np.clip(np.minimum(t / 1.0, (DUR - t) / 2.0), 0, 1)
     pcm = (np.clip(mix, -1, 1).T * 32767).astype(np.int16)
